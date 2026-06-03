@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahmood Abdulla — AI-Powered Builder</title>
+  <meta name="description" content="Mahmood Abdulla — IT student & AI-powered builder from Bahrain. Ships real, production-ready products." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #0f0f16;
+      --bg3: #13131c;
+      --yellow: #e8ff47;
+      --cyan: #47d4ff;
+      --orange: #e87832;
+      --text: #e8e8f0;
+      --muted: #6b6b80;
+      --border: rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--yellow); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .btn-hire {
+      background: var(--yellow);
+      color: #0a0a0f;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .btn-hire:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-mobile-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 120px 5% 80px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(232,255,71,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,255,71,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
+    }
+
+    .hero-glow-1 {
+      position: absolute;
+      width: 600px; height: 600px;
+      top: -100px; left: -200px;
+      background: radial-gradient(circle, rgba(232,255,71,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      width: 500px; height: 500px;
+      bottom: -100px; right: -100px;
+      background: radial-gradient(circle, rgba(71,212,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(232,255,71,0.08);
+      border: 1px solid rgba(232,255,71,0.2);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--yellow);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      display: block;
+      width: 7px; height: 7px;
+      background: var(--yellow);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(232,255,71,0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(232,255,71,0); }
+    }
+
+    .hero-h1 {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero-h1 .accent-y { color: var(--yellow); }
+    .hero-h1 .accent-c { color: var(--cyan); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--yellow);
+      color: #0a0a0f;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: opacity 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      line-height: 1;
+      color: var(--yellow);
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 5%; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin-bottom: 4rem;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg); }
+
+    .projects-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      transition: border-color 0.3s;
+    }
+    .project-card:hover { border-color: rgba(255,255,255,0.14); }
+
+    .project-card.reverse { direction: rtl; }
+    .project-card.reverse > * { direction: ltr; }
+
+    .project-img {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .project-img-cockpit {
+      background: linear-gradient(135deg, #1a1208, #2a1a0a);
+    }
+    .project-img-cockpit .img-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--orange);
+      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
+    }
+    .project-img-cockpit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(232,120,50,0.15) 0%, transparent 70%);
+    }
+
+    .project-img-tidecast {
+      background: linear-gradient(135deg, #040e1a, #061824);
+    }
+    .project-img-tidecast .img-label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--cyan);
+      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
+    }
+    .project-img-tidecast::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(71,212,255,0.12) 0%, transparent 70%);
+    }
+
+    .project-body {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      width: fit-content;
+    }
+    .tag-orange {
+      background: rgba(232,120,50,0.12);
+      color: var(--orange);
+      border: 1px solid rgba(232,120,50,0.25);
+    }
+    .tag-cyan {
+      background: rgba(71,212,255,0.08);
+      color: var(--cyan);
+      border: 1px solid rgba(71,212,255,0.2);
+    }
+
+    .project-title {
+      font-size: 1.9rem;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg2); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .skill-card {
+      background: var(--bg2);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: background 0.25s;
+    }
+    .skill-card:hover { background: var(--bg3); }
+
+    .skill-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .skill-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .skill-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.8;
+    }
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      padding-bottom: 2rem;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+      margin-top: 4px;
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.2s;
+    }
+    .timeline-dot.active {
+      border-color: var(--yellow);
+      background: rgba(232,255,71,0.1);
+    }
+    .timeline-dot.active::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--yellow);
+    }
+
+    .timeline-content { flex: 1; }
+
+    .timeline-period {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .timeline-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); }
+
+    .contact-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 300px;
+      top: -150px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse, rgba(232,255,71,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-heading {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .contact-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+    }
+    .contact-btn:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+    .contact-btn .icon { font-size: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 5%;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: var(--bg);
+    }
+
+    footer p {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: flex; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: rgba(10,10,15,0.98);
+        backdrop-filter: blur(12px);
+        padding: 2rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1.5rem;
+        z-index: 99;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .project-card.reverse { direction: ltr; }
+      .project-img { min-height: 220px; }
+      .project-body { padding: 2rem; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .contact-card { padding: 3rem 2rem; }
+
+      .hero-stats { gap: 2rem; }
+      .stat-divider { display: none; }
+    }
+
+    @media (max-width: 540px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 4%; }
+      section { padding: 70px 4%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#hero" class="logo">M<span>.</span>Abdulla</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="mailto:mhd.jrma489@gmail.com" class="btn-hire">Hire me</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Available for projects &nbsp;·&nbsp; Bahrain</div>
+    <h1 class="hero-h1">
+      turning ideas<br />
+      into products<br />
+      <span class="accent-y">with ai</span>
+    </h1>
+    <p class="hero-sub">IT student &amp; AI-powered builder who ships real, production-ready products. Based in Bahrain.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">See my work</a>
+      <a href="https://github.com/mahmood8221" target="_blank" rel="noopener" class="btn-secondary">GitHub ↗</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Shipped Products</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">What AI Can Do</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">BH</span>
+        <span class="stat-label">Bahrain Built</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label fade-in">Work</p>
+  <h2 class="section-title fade-in">Shipped products.</h2>
+  <p class="section-sub fade-in">Real tools. Real users. Built and deployed, not just prototyped.</p>
+
+  <div class="projects-stack">
+
+    <!-- Cockpit: text left, image right -->
+    <div class="project-card fade-in">
+      <div class="project-body">
+        <span class="project-tag tag-orange">Desktop App</span>
+        <h3 class="project-title">Cockpit</h3>
+        <p class="project-desc">Custom operations tool built for an account manager at a creative agency in Bahrain. Eliminates context-switching, manages client work across Bahrain Marina, Time Out Market &amp; Quest School. Claude AI integration for content generation. AES-256-GCM encrypted secret storage. Ships as a Windows installer under 7MB.</p>
+        <div class="tech-pills">
+          <span class="pill">Tauri 2</span>
+          <span class="pill">Rust</span>
+          <span class="pill">React</span>
+          <span class="pill">TypeScript</span>
+          <span class="pill">SQLite</span>
+          <span class="pill">Tailwind</span>
+          <span class="pill">Claude AI</span>
+          <span class="pill">AES-256</span>
+        </div>
+      </div>
+      <div class="project-img project-img-cockpit">
+        <span class="img-label">Cockpit</span>
+      </div>
+    </div>
+
+    <!-- TideCast: image left, text right -->
+    <div class="project-card reverse fade-in">
+      <div class="project-body">
+        <span class="project-tag tag-cyan">Web App</span>
+        <h3 class="project-title">TideCast</h3>
+        <p class="project-desc">Live fishing intelligence dashboard for Bahrain. Real-time tide charts, fishing score engine, solunar data, marine weather, best feeding windows, GPS spot tracking. Built for serious fishermen.</p>
+        <div class="tech-pills">
+          <span class="pill">React</span>
+          <span class="pill">TypeScript</span>
+          <span class="pill">Tailwind</span>
+          <span class="pill">Live APIs</span>
+          <span class="pill">Claude AI</span>
+          <span class="pill">Chart.js</span>
+        </div>
+        <a href="https://github.com/mahmood8221/tidecast-fishing" target="_blank" rel="noopener" class="btn-secondary" style="width:fit-content; margin-top:0.5rem;">View on GitHub ↗</a>
+      </div>
+      <div class="project-img project-img-tidecast">
+        <span class="img-label">TideCast</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label fade-in">Capabilities</p>
+  <h2 class="section-title fade-in">What I bring.</h2>
+  <p class="section-sub fade-in">Not a generalist. A builder with a specific, sharp stack.</p>
+
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">AI Integration</div>
+      <div class="skill-desc">Claude API, prompt engineering, AI-powered features in real products — not toy demos.</div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">⚛</div>
+      <div class="skill-name">React &amp; TypeScript</div>
+      <div class="skill-desc">Production UIs with clean, typed, component-driven code and solid state management.</div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🦀</div>
+      <div class="skill-name">Tauri &amp; Rust</div>
+      <div class="skill-desc">Native desktop apps compiled to tiny, fast Windows installers. Real binaries, real performance.</div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🔄</div>
+      <div class="skill-name">Automation</div>
+      <div class="skill-desc">n8n, Make.com, API pipelines — automating workflows end to end so humans don't have to.</div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🗄</div>
+      <div class="skill-name">Data &amp; Storage</div>
+      <div class="skill-desc">SQLite, encrypted storage, Zoho, Google, Basecamp integrations — data done properly.</div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🚀</div>
+      <div class="skill-name">Ship it</div>
+      <div class="skill-desc">From idea to deployed product. Fast, real, and production-ready. No endless MVPs.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label fade-in">Background</p>
+  <h2 class="section-title fade-in">Who I am.</h2>
+
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>
+        <strong>I'm Mahmood Abdulla</strong>, an IT student and AI-powered builder based in Bahrain. I build software tools that solve real problems — not portfolio pieces, but things people actually use every day.
+      </p>
+      <p>
+        My approach is simple: take an idea, figure out the fastest path to something real, and ship it. I use AI as a force multiplier — not to replace thinking, but to compress timelines and punch above my weight. I've built a full desktop app and a live web app in a fraction of the time it would take a traditional team.
+      </p>
+      <p>
+        Before software, I worked in <strong>customer service and sales</strong> at Bahrain Airport Services and Suppliree. That front-line experience gave me something most developers lack: an instinct for what users actually need versus what sounds good on paper.
+      </p>
+      <p>
+        I'm currently pursuing a <strong>BSc in IT &amp; Computing</strong> at Arab Open University Bahrain and heading into a Software Engineering Immersive at General Assembly. I learn fast, I build fast, and I'm always available for the right project.
+      </p>
+    </div>
+
+    <div class="fade-in">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot active"></div>
+          <div class="timeline-content">
+            <div class="timeline-period">2026 — Now</div>
+            <div class="timeline-title">BSc IT &amp; Computing</div>
+            <div class="timeline-sub">Arab Open University, Bahrain</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot active"></div>
+          <div class="timeline-content">
+            <div class="timeline-period">Summer 2026</div>
+            <div class="timeline-title">Software Engineering Immersive</div>
+            <div class="timeline-sub">General Assembly — upcoming</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-period">2025 — 2026</div>
+            <div class="timeline-title">Built Cockpit &amp; TideCast</div>
+            <div class="timeline-sub">Shipped two production products</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-period">Prior</div>
+            <div class="timeline-title">Customer Service &amp; Sales</div>
+            <div class="timeline-sub">Bahrain Airport Services · Suppliree</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-card fade-in">
+    <h2 class="contact-heading">Let's build something.</h2>
+    <p class="contact-sub">Have an idea? A problem to solve? I'm available for projects in Bahrain and remotely.</p>
+    <div class="contact-links">
+      <a href="mailto:mhd.jrma489@gmail.com" class="contact-btn">
+        <span class="icon">✉</span> mhd.jrma489@gmail.com
+      </a>
+      <a href="tel:+97333293000" class="contact-btn">
+        <span class="icon">📞</span> +973 3329 3000
+      </a>
+      <a href="https://github.com/mahmood8221" target="_blank" rel="noopener" class="contact-btn">
+        <span class="icon">⌥</span> github.com/mahmood8221
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Mahmood Abdulla. Built with AI.</p>
+  <p>Bahrain 🇧🇭</p>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        // Stagger siblings
+        const siblings = [...e.target.parentElement.querySelectorAll('.fade-in:not(.visible)')];
+        const idx = siblings.indexOf(e.target);
+        setTimeout(() => e.target.classList.add('visible'), idx * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
